@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mines Predictor</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+        }
+        .phone-form {
+            margin-bottom: 20px;
+        }
+        input, button {
+            background-color: black;
+            color: red;
+            border: 2px solid red;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: red;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            margin: 0 auto;
+            width: 300px; /* Adjust this width as needed */
+        }
+        .box {
+            background-color: #333;
+            border: 2px solid red;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: red;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .box.mine {
+            background-color: red;
+            color: black;
+            font-weight: bold;
+        }
+        .loading {
+            display: none;
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .back-link {
+            color: red;
+            text-decoration: underline;
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mines Predictor</h1>
+        <form id="phoneForm" class="phone-form">
+            <input type="text" id="phoneNumber" placeholder="Enter phone number (e.g., +251XXXXXXXXX)" required>
+            <button type="submit">Predict</button>
+        </form>
+        <div class="grid" id="grid"></div>
+        <div class="loading" id="loading">Loading...</div>
+        <a href="dashboard.html" class="back-link">Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Generate 5x5 grid of boxes
+        const gridContainer = document.getElementById('grid');
+        for (let i = 0; i < 25; i++) {
+            const box = document.createElement('div');
+            box.className = 'box';
+            gridContainer.appendChild(box);
+        }
+
+        document.getElementById('phoneForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const phoneNumber = document.getElementById('phoneNumber').value;
+
+            if (phoneNumber.trim() === '') {
+                alert('Please enter a valid phone number');
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+
+                // Remove existing mines
+                const boxes = document.querySelectorAll('.box');
+                boxes.forEach(box => box.classList.remove('mine'));
+                boxes.forEach(box => box.textContent = ''); // Clear text in boxes
+
+                // Pick a random box to place the mine
+                const randomIndex = Math.floor(Math.random() * boxes.length);
+                boxes[randomIndex].classList.add('mine');
+                boxes[randomIndex].textContent = 'Mine';
+            }, 5000); // 5 seconds delay
+        });
+    </script>
+</body>
+</html>

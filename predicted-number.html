@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicted Number Input</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+        input {
+            background-color: black;
+            color: red;
+            border: 2px solid red;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: red;
+            color: black;
+            border: none;
+            padding: 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .back-link {
+            color: red;
+            text-decoration: underline;
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Predicted Number</h1>
+        <form id="numberForm">
+            <input type="text" id="predictedNumberInput" placeholder="Enter predicted number" required>
+            <button type="submit">Send</button>
+        </form>
+        <a href="aviator.html" class="back-link">Back to Aviator Predictor</a>
+    </div>
+
+    <script>
+        document.getElementById('numberForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const number = document.getElementById('predictedNumberInput').value;
+            localStorage.setItem('predictedNumber', number);
+            alert('Predicted number saved successfully');
+            document.getElementById('predictedNumberInput').value = '';
+        });
+    </script>
+</body>
+</html>

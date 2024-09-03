@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviator Predictor</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            position: relative;
+            width: 300px; /* Adjust as needed */
+            height: 300px; /* Adjust as needed */
+        }
+        .circle {
+            border: 6px solid red; /* Thicker border */
+            border-radius: 50%;
+            width: 200px; /* Bigger circle size */
+            height: 200px; /* Bigger circle size */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .inner-circle {
+            border: 6px solid red; /* Thicker border */
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            animation: rotate-inner 10s linear infinite;
+        }
+        button {
+            background-color: red;
+            color: black;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .back-link {
+            color: red;
+            text-decoration: underline;
+            margin-top: 20px;
+            display: block;
+        }
+        #predictedNumber {
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circle">
+            <div class="inner-circle"></div>
+            <div class="outer-segment"></div>
+            <div id="predictedNumber">--</div>
+        </div>
+        <button onclick="getSignal()">Get Signal</button>
+        <a href="https://habtam.bet/games-virtual/games/SPB-aviator/real/detail" class="back-link">aviator game</a>
+    </div>
+
+    <script>
+        function getSignal() {
+            setTimeout(() => {
+                const number = localStorage.getItem('predictedNumber');
+                document.getElementById('predictedNumber').textContent = number ? number : '--';
+            }, 2000); // 2 seconds delay
+        }
+    </script>
+</body>
+</html>
